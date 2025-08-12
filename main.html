@@ -1,116 +1,451 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="Обучение с Жантиком, курс видеомонтажа, Premier Pro обучение">
-  <meta name="description" content="Полный курс видеомонтажа с нуля: интерфейс, цветокоррекция, фриланс и больше.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Главная страница курса</title>
+  <meta name="keywords" content="Обучение с Жантиком, курс видеомонтажа, Premiere Pro обучение" />
+  <meta name="description" content="Полный курс видеомонтажа с нуля: интерфейс, цветокоррекция, фриланс и больше." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f8;
-      color: #333;
+    :root{
+      --bg1:#1e003f;
+      --bg2:#3a0070;
+      --accent1:#9d4edd;
+      --accent2:#6f00ff;
+      --muted: rgba(255,255,255,0.82);
+      --glass: rgba(255,255,255,0.06);
+      --card-bg: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
     }
-    header {
-      background: linear-gradient(to right, #1e3c72, #2a5298);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(120deg,var(--bg1),var(--bg2));
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      padding:40px 20px;
     }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    /* лёгкая точечная текстура сверху (встроенный SVG) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='none'/%3E%3Ccircle cx='6' cy='6' r='1' fill='white' fill-opacity='0.03'/%3E%3C/svg%3E");
+      background-repeat:repeat;
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      opacity:0.7;
     }
+
+    .wrap{max-width:var(--maxw); margin:0 auto; position:relative;}
+
+    header.site-header{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:space-between;
+      padding:22px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      margin-bottom:22px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:56px; height:56px; border-radius:12px;
+      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; color:#fff; font-size:18px;
+      box-shadow:0 8px 28px rgba(111,0,255,0.12);
+    }
+    .brand .title{font-size:20px; font-weight:700; color:#fff;}
+    .brand .sub{font-size:13px; color: rgba(255,255,255,0.8); margin-top:2px;}
+
+    /* основной контейнер */
+    main.container{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      margin-top:18px;
+      padding:24px;
+      border-radius:16px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
     .intro {
-      background: #e8f4fa;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 30px;
-      font-size: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:18px;
+      border-radius:12px;
+      font-size:16px;
+      color:rgba(255,255,255,0.95);
+      margin-bottom:20px;
+      border:1px solid rgba(255,255,255,0.02);
     }
-    .line {
-      border-top: 2px solid #ccc;
-      margin: 40px 0;
+
+    .toc-title{
+      font-weight:600;
+      margin: 8px 0 14px;
+      font-size:18px;
+      color: #fff;
     }
-    .section {
-      margin: 10px 0;
+
+    .sections {
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
     }
-    a.section-link {
-      display: block;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 8px;
-      background-color: #f0f8ff;
-      color: #1a237e;
-      transition: 0.3s;
+
+    .section-card{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 16px;
+      background: var(--card-bg);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s;
     }
-    a.section-link:hover {
-      background-color: #d6eaff;
+    .section-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(2,6,23,0.5);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
     }
-    .toc {
-      font-weight: bold;
-      margin-bottom: 20px;
+    .section-left{display:flex; gap:12px; align-items:center;}
+    .bullet{
+      width:44px; height:44px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:700;
+      border:1px solid rgba(255,255,255,0.02);
     }
-    .clickable-tip {
-      font-size: 14px;
-      color: #888;
-      margin-left: 10px;
+    .section-info{display:flex; flex-direction:column;}
+    .section-info .title{font-size:16px; font-weight:700; color:#fff;}
+    .section-info .subtitle{font-size:13px; color:rgba(255,255,255,0.75); margin-top:4px;}
+
+    a.section-link{
+      color:#fff;
+      background: linear-gradient(90deg,var(--accent2), var(--accent1));
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      transition: transform .14s, box-shadow .14s;
+      box-shadow:0 6px 18px rgba(111,0,255,0.12);
     }
-    .hidden-keyword {
-      display: none;
+    a.section-link:hover{ transform: translateY(-3px); box-shadow:0 18px 40px rgba(111,0,255,0.18); }
+
+    footer{ margin-top:20px; text-align:center; color:rgba(255,255,255,0.7); font-size:13px; }
+
+    /* адаптив */
+    @media (min-width:700px){
+      .sections{ grid-template-columns: 1fr; }
     }
+    @media (max-width:480px){
+      body{ padding:20px 12px; }
+      .brand .title{font-size:16px}
+      .logo{width:48px;height:48px}
+      .section-card{padding:12px}
+      .section-info .title{font-size:15px}
+    }
+
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <header class="site-header" aria-label="Шапка сайта">
+      <div class="brand">
+        <div class="logo">JP</div>
+        <div>
+          <div class="title">Курс по видеомонтажу</div>
+          <div class="sub">Adobe Premiere Pro — от нуля до результата</div>
+        </div>
+      </div>
+      <div style="text-align:right; font-size:14px; color:rgba(255,255,255,0.85);">
+        Добро пожаловать!
+      </div>
+    </header>
 
-  <header>Главная страница курса</header>
+    <main class="container" role="main">
+      <!-- приветствие / небольшой трейлер -->
+      <div class="intro">
+        <strong>Привет!</strong> В этом курсе вы пройдёте путь от установки и знакомства с интерфейсом Adobe Premiere Pro до финального рендера и стартов на фрилансе. Будут практические задания, разборы и готовые шаблоны — готовьтесь к интенсивной, но понятной практике.
+      </div>
 
-  <div class="container">
-    <div class="intro">
-      Добро пожаловать на курс по видеомонтажу! Вместе мы изучим основы работы с программой <strong>Adobe Premiere Pro</strong>, научимся делать динамичные монтажи, использовать футажи и переходы, работать со звуком и цветом, а в конце — освоим фриланс как источник дохода. Готовы? Вперёд!
-    </div>
+      <!-- скрытая SEO-фраза -->
+      <p style="display:none">Обучение с Жантиком</p>
 
-    <!-- Скрытая SEO-фраза -->
-    <p class="hidden-keyword">Обучение с Жантиком</p>
+      <div class="toc-title">Оглавление разделов</div>
 
-    <div class="toc">
-      <a href="- https://vk.com/@617130614-ustanovka-adobe-premiere-pro" class="section-link">Подготовительный раздел<span class="clickable-tip"> ← нажми на меня</span></a>
-    </div>
+      <div class="sections">
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">0</div>
+            <div class="section-info">
+              <div class="title">Раздел 0 - Вступление</div>
+              <div class="subtitle">Коротко о курсе и целях</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/sTsRkKigBp1ymA?w=1" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
 
-    <div class="line"></div>
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">1</div>
+            <div class="section-info">
+              <div class="title">Раздел 1 - 10 принципов монтажа</div>
+              <div class="subtitle">Основные правила и хитрости</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/WJosHmgK10apQA?w=1" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
 
-    <div class="section"><a href="https://disk.yandex.kz/d/sTsRkKigBp1ymA?w=1 " class="section-link">Раздел 0 - Вступление</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/WJosHmgK10apQA?w=1 " class="section-link">Раздел 1 - 10 принципов монтажа</a></div>
-    <div class="section"><a href="- https://disk.yandex.kz/d/WoMbNIJcbduV1g?w=1" class="section-link">Раздел 2 - Интерфейс Premiere Pro</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/YC2LQmKAqI2G2w" class="section-link">Раздел 3 - Подготовка к монтажу</a></div>
-    <div class="section"><a href=" https://disk.yandex.ru/d/Q9Jgnud7VIIeXA" class="section-link">Раздел 4 - Процесс монтажа</a></div>
-    <div class="section"><a href="https://disk.yandex.ru/d/hMde9Lk4Jb7l3w    " class="section-link">Раздел 4 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/ov-snWHe5vzEjg " class="section-link">Раздел 5 - Базовая обработка видео</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/KNQifuZzdse2FQ " class="section-link">Раздел 5 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/eueYBGm2NR_axg " class="section-link">Раздел 6 - Переходы</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/4IwB0ILIkdxJSQ " class="section-link">Раздел 6 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/YLnvGC1rVvwPPg " class="section-link">Раздел 7 - Использование футажей</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/mtsDP8IAR1L43g " class="section-link">Раздел 7 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/y456Rhgo6iIpKw " class="section-link">Раздел 8 - Титры</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/1dhouKFarag8Mg " class="section-link">Раздел 8 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/bOOAWuW7J1w2Dw " class="section-link">Раздел 9 - Работа со звуком</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/WYRSLcFaSMnfIA " class="section-link">Раздел 9 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/azbLE9fKnExSjA " class="section-link">Раздел 10 - Цветокоррекция</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/h_u7LJuMOl9q_Q " class="section-link">Раздел 10 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/1lMcBz5fm5gYwQ " class="section-link">Раздел 11 - Стилизация видео</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/Ln4EFwprU6MO9Q " class="section-link">Раздел 11 - Закрепление материала</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/tUux7Jic1-vphw " class="section-link">Раздел 12 - Финальный рендеринг</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/YvoIu54MObHZrA " class="section-link">Раздел 13 - Повествование</a></div>
-    <div class="section"><a href="https://disk.yandex.kz/d/3VjbXRz0ZUakeQ " class="section-link">Раздел 14 - Фриланс</a></div>
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">2</div>
+            <div class="section-info">
+              <div class="title">Раздел 2 - Интерфейс Premiere Pro</div>
+              <div class="subtitle">Организация рабочего пространства</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/WoMbNIJcbduV1g?w=1" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">3</div>
+            <div class="section-info">
+              <div class="title">Раздел 3 - Подготовка к монтажу</div>
+              <div class="subtitle">Импорт, организация файлов</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/YC2LQmKAqI2G2w" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">4</div>
+            <div class="section-info">
+              <div class="title">Раздел 4 - Процесс монтажа</div>
+              <div class="subtitle">Пошаговый рабочий процесс</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.ru/d/Q9Jgnud7VIIeXA" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">4*</div>
+            <div class="section-info">
+              <div class="title">Раздел 4 - Закрепление материала</div>
+              <div class="subtitle">Практика по пройденному</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.ru/d/hMde9Lk4Jb7l3w" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">5</div>
+            <div class="section-info">
+              <div class="title">Раздел 5 - Базовая обработка видео</div>
+              <div class="subtitle">Режимы, экспорты, фильтры</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/ov-snWHe5vzEjg" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">5*</div>
+            <div class="section-info">
+              <div class="title">Раздел 5 - Закрепление материала</div>
+              <div class="subtitle">Практические задания</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/KNQifuZzdse2FQ" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">6</div>
+            <div class="section-info">
+              <div class="title">Раздел 6 - Переходы</div>
+              <div class="subtitle">Как правильно применять переходы</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/eueYBGm2NR_axg" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">6*</div>
+            <div class="section-info">
+              <div class="title">Раздел 6 - Закрепление материала</div>
+              <div class="subtitle">Упражнения по переходам</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/4IwB0ILIkdxJSQ" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">7</div>
+            <div class="section-info">
+              <div class="title">Раздел 7 - Использование футажей</div>
+              <div class="subtitle">Где брать и как применять</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/YLnvGC1rVvwPPg" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">7*</div>
+            <div class="section-info">
+              <div class="title">Раздел 7 - Закрепление материала</div>
+              <div class="subtitle">Практика с футажами</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/mtsDP8IAR1L43g" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">8</div>
+            <div class="section-info">
+              <div class="title">Раздел 8 - Титры</div>
+              <div class="subtitle">Создание и анимация титров</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/y456Rhgo6iIpKw" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">8*</div>
+            <div class="section-info">
+              <div class="title">Раздел 8 - Закрепление материала</div>
+              <div class="subtitle">Практические титры</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/1dhouKFarag8Mg" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">9</div>
+            <div class="section-info">
+              <div class="title">Раздел 9 - Работа со звуком</div>
+              <div class="subtitle">Чистка, миксы, эффекты</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/bOOAWuW7J1w2Dw" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">9*</div>
+            <div class="section-info">
+              <div class="title">Раздел 9 - Закрепление материала</div>
+              <div class="subtitle">Звуковые задания</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/WYRSLcFaSMnfIA" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">10</div>
+            <div class="section-info">
+              <div class="title">Раздел 10 - Цветокоррекция</div>
+              <div class="subtitle">Основы работы с цветом</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/azbLE9fKnExSjA" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">10*</div>
+            <div class="section-info">
+              <div class="title">Раздел 10 - Закрепление материала</div>
+              <div class="subtitle">Практика по цвету</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/h_u7LJuMOl9q_Q" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">11</div>
+            <div class="section-info">
+              <div class="title">Раздел 11 - Стилизация видео</div>
+              <div class="subtitle">Эффекты и look'и</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/1lMcBz5fm5gYwQ" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">11*</div>
+            <div class="section-info">
+              <div class="title">Раздел 11 - Закрепление материала</div>
+              <div class="subtitle">Практика стилизации</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/Ln4EFwprU6MO9Q" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">12</div>
+            <div class="section-info">
+              <div class="title">Раздел 12 - Финальный рендеринг</div>
+              <div class="subtitle">Экспорт, настройки и оптимизация</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/tUux7Jic1-vphw" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">13</div>
+            <div class="section-info">
+              <div class="title">Раздел 13 - Повествование</div>
+              <div class="subtitle">Как строить историю в видео</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/YvoIu54MObHZrA" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+        <div class="section-card">
+          <div class="section-left">
+            <div class="bullet">14</div>
+            <div class="section-info">
+              <div class="title">Раздел 14 - Фриланс</div>
+              <div class="subtitle">Как найти заказ и работать с клиентами</div>
+            </div>
+          </div>
+          <a class="section-link" href="https://disk.yandex.kz/d/3VjbXRz0ZUakeQ" target="_blank" rel="noopener noreferrer">Открыть</a>
+        </div>
+
+      </div>
+
+      <footer>
+        © 2025 — Курс по видеомонтажу. Все материалы — для обучения.
+      </footer>
+    </main>
   </div>
-
 </body>
 </html>
